@@ -5,7 +5,7 @@ tinyphysicsengine in jai lang
 
 ![](tpe1.gif)![](tpe2.gif)![](tpe3.gif)![](tpe4.gif)![](tpe5.gif)![](tpe6.gif)![](tpe7.gif)
 
-This is tinyphysicsengine (TPE), a small, completely public domain KISS/suckless, fixed point physically inaccurate pure C header only 3D physics engine (or rather a library) mostly for entertainment purposes that's supposed to run even on tiny computers such as embedded, even **bare metal**. It's written in the same style/philosophy as [small3dlib](https://codeberg.org/drummyfish/small3dlib), [raycastlib](https://codeberg.org/drummyfish/raycastlib) etc.
+This is tinyphysicsengine (TPE), a small, completely public domain KISS/suckless, fixed point physically inaccurate pure Jai lang 3D physics engine (or rather a library) that's supposed to run even on tiny computers such as embedded, even **bare metal**.
 
 TPE is NOT a "robust framework" and it is **NOT physically accurate**; basic things follow physics equations but a lot of other things are empirical approximations, the main goal is to achieve SIMPLE behavior that LOOKS LIKE real world physics. TPE can be used to **fake** many things (even such as e.g. car physics) just as in computer graphics we fake things such as reflections because in games we simply don't really notice they're inaccurate. This approach has been chosen on purpose after trying and failing to create a traditional physically accurate engine which is archived in the *old* folder; I already had physically correct collision detections and responses of rigid bodies programmed but eventually failed on dealing with the complexity of handling imprecisions of fixed point in very low/high energy cases. At that point I started over with a completely new approach: just use soft bodies made of spheres connected with springs and fake what is possible to fake.
 
@@ -15,7 +15,7 @@ TPE is NOT a "robust framework" and it is **NOT physically accurate**; basic thi
 
 ## features
 
-- KISS, **suckless**, pure C99, header only
+- KISS, **suckless**, pure jai, basically 1 file.
 - **compatible with small3dlib**, easy integration (same data types, conventions, ...)
 - **no dependencies**, not even standard library (except for stdint header)
 - **no build system**
@@ -62,7 +62,7 @@ You can probably use this to:
 ## limitations
 
 - generally **NOT physically correct**, for God's sake do not use this for computation of your space rocket's trajectory!
-- even though **performance** is good for simple simulations, it is not best possible and **won't scale** very much because the soft body model requires to make more computations and also takes more RAM (however the code is still a reasonably optimized C that should run alright)
+- even though **performance** is good for simple simulations, it is not best possible and **won't scale** very much because the soft body model requires to make more computations and also takes more RAM (however the code is still a reasonably optimized Jai code that should run alright)
 - yes, bodies sometimes vibrate and do weird things
 - **fixed point is not extremely precise** of course
 - **NOT a robust framework** that solves everything for you, more of a library with a set of tools that will help you easily create simple physics, you may need to handle many things yourself
@@ -82,24 +82,5 @@ You can probably use this to:
 
 ## how to
 
-For a basic use see the `hello.c` example program and `hello2.c` as the next, then take a look at the more complex ones. Also see the library file itself, it is highly commented and is supposed to serve as its own documentation.
+For a basic use see the `test_hello.jai` example program and `test_hello2.jai` as the next, then take a look at the more complex ones. Also see the library file itself, it is highly commented and is supposed to serve as its own documentation.
 
-Very basic sum up: TODO, coming soon :)
-
-## usage rights
-
-tl;dr: CC0 public domain, I hate intellectual property, do whatever you want
-
-I (drummyfish) have made this project completely myself from scratch. Everything in this repository is available under CC0 1.0 (public domain, https://creativecommons.org/publicdomain/zero/1.0/) + a waiver of all other IP rights (including patents and trademarks).
-
-This project is made out of love and to be truly helpful to everyone, not for any self interest. I want it to forever stay completely in the public domain, not owned by anyone.
-
-This is not mandatory but please consider supporting free software and free culture by using free licenses and/or waivers.
-
-If you'd like to support me or just read something about me and my projects, visit my site: www.tastyfish.cz.
-
-You can also choose to use this under the following waiver which is here to just ensure more legal safety and waiving of additional IP such as patents:
-
-The intent of this waiver is to ensure that this work will never be encumbered by any exclusive intellectual property rights and will always be in the public domain world-wide, i.e. not putting any restrictions on its use.
-
-Each contributor to this work agrees that they waive any exclusive rights, including but not limited to copyright, patents, trademark, trade dress, industrial design, plant varieties and trade secrets, to any and all ideas, concepts, processes, discoveries, improvements and inventions conceived, discovered, made, designed, researched or developed by the contributor either solely or jointly with others, which relate to this work or result from this work. Should any waiver of such right be judged legally invalid or ineffective under applicable law, the contributor hereby grants to each affected person a royalty-free, non transferable, non sublicensable, non exclusive, irrevocable and unconditional license to this right.
