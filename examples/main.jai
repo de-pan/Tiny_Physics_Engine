@@ -3,7 +3,7 @@
 #load "physics_aux.jai";
 #load "helper.jai";
 
-#load "tests/tests_awareness.jai";
+#load "tests_awareness.jai";
 
 
 main :: () {
