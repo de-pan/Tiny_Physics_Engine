@@ -208,6 +208,7 @@ TPE_Connection :: struct
 
 TPE_bodyInit :: (body: *TPE_Body, joints: *TPE_Joint, jointCount: u8, connections: *TPE_Connection, connectionCount: u8, mass: TPE_MASS_UNIT) 
 {
+  assert(jointCount != 0);
   body.joints = joints;
   body.jointCount = jointCount;
   body.connections = connections;
@@ -216,7 +217,6 @@ TPE_bodyInit :: (body: *TPE_Body, joints: *TPE_Joint, jointCount: u8, connection
   body.friction = TPE_F / 2;
   body.elasticity = TPE_F / 2;
   body.flags = 0;
-  assert(jointCount != 0);
   body.jointMass = TPE_nonZero_r(mass / jointCount);
 
 //   for (u32 i = 0; i < connectionCount; ++i)

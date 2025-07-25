@@ -1,11 +1,19 @@
-test_hello2 :: () 
+
+
+test_hello3 :: () 
 { 
   bodies: [2]TPE_Body;             // we'll have two bodies
   world: TPE_World;
-
+/*
   joints: [32]TPE_Joint;           // joint buffer
   connections: [64]TPE_Connection; // connection buffer
+*/
 
+  joints: [64]TPE_Joint;
+  connections: [128]TPE_Connection;
+  joint_count, connection_count := TPE_makeRagdoll(joints, connections, TPE_vec3(2*ROOM_SIZE / 4, ROOM_SIZE / 2,0), TPE_F);
+  TPE_bodyInit(*bodies[0], joints.data, joint_count, connections.data, connection_count, TPE_F);
+/*
   /* we'll create the first body "by hand", just two joints (spheres) with one
      connection: */
   joints[0] = TPE_joint(TPE_vec3(3 * ROOM_SIZE / 4,ROOM_SIZE / 2,0),TPE_F);
@@ -22,16 +30,19 @@ test_hello2 :: ()
   box_c :[]TPE_Connection= connections; box_c.count = 16; box_c.data +=1;
   TPE_makeBox(box_j,box_c,2 * TPE_F, 2 * TPE_F, 2 * TPE_F,TPE_F);
   TPE_bodyInit(*bodies[1],joints.data + 2,8,connections.data + 1,16,TPE_F);
-  TPE_bodyMoveTo(*bodies[1],TPE_vec3(ROOM_SIZE / 2,ROOM_SIZE / 2,0));
+*/
 
-  TPE_worldInit(*world,bodies.data,2,environmentDistance);
+
+  // TPE_bodyMoveTo(*bodies[1],TPE_vec3(ROOM_SIZE / 2,ROOM_SIZE / 2,0));
+
+  TPE_worldInit(*world,bodies.data,1,environmentDistance);
 
   // give some initial velocities and spins to the bodies:
-
+  // bodies[0]
   TPE_bodyAccelerate(*world.bodies[0],TPE_vec3(-1 * TPE_F / 8,TPE_F / 3, 0));
   TPE_bodySpin(*world.bodies[0],TPE_vec3(0,0,-1 * TPE_F / 25));
-  TPE_bodyAccelerate(*world.bodies[1],TPE_vec3(-1 * TPE_F / 2,50,0));
-  TPE_bodySpin(*world.bodies[1],TPE_vec3(0,0,TPE_F / 23));
+  // TPE_bodyAccelerate(*world.bodies[1],TPE_vec3(-1 * TPE_F / 2,50,0));
+  // TPE_bodySpin(*world.bodies[1],TPE_vec3(0,0,TPE_F / 23));
 
  FRAMES :: 200;
 
@@ -72,9 +83,9 @@ test_hello2 :: ()
 
 
 }
-#scope_file
 
-ROOM_SIZE :: (20 * TPE_F);
+#scope_file
+ROOM_SIZE :: (200 * TPE_F);
 
  environmentDistance :: ( point: TPE_Vec3,  maxDistance: TPE_Unit) -> TPE_Vec3
 {
@@ -85,8 +96,8 @@ ROOM_SIZE :: (20 * TPE_F);
 
 // the following functions are just for ASCII drawing the world
 
-SCREEN_W :: 32;
-SCREEN_H :: 16;
+SCREEN_W :: 32*2;
+SCREEN_H :: 16*2;
 
 screen: [SCREEN_W * SCREEN_H]u8;
 
